@@ -126,7 +126,7 @@ const storyData = {
     choices: []
   },
   reviewing: {
-    text: "System is reviewing your identity...",
+    text: "System is verifying your identity...",
     choices: [
       { text: "Continue waiting", next: "reviewing" },
       { text: "Give up", next: "leave" }
@@ -154,11 +154,11 @@ function renderScene(sceneId) {
   currentScene = sceneId;
 
   if (sceneId === "start") {
-    storyEl.textContent = "Hi there, little bird!\nPlease enter your name:";
+    storyEl.textContent = "Hi there, little bird!\nPlease let me know your name:";
 
     const input = document.createElement("input");
     input.setAttribute("type", "text");
-    input.setAttribute("placeholder", "Your name here...");
+    input.setAttribute("placeholder", "");
     input.id = "nameInput";
 
     const submitBtn = document.createElement("button");
@@ -183,7 +183,7 @@ function renderScene(sceneId) {
 
     const input = document.createElement("input");
     input.setAttribute("type", "text");
-    input.setAttribute("placeholder", "Enter name...");
+    input.setAttribute("placeholder", "");
     input.id = "verifyNameInput";
 
     const submitBtn = document.createElement("button");
@@ -202,6 +202,34 @@ function renderScene(sceneId) {
     return;
   }
 
+  if (sceneId === "leave") {
+    const scene = storyData[sceneId];
+    storyEl.textContent = scene.text;
+
+    setTimeout(() => {
+      storyEl.style.transition = "opacity 2s ease";
+      storyEl.style.opacity = "0";
+
+      setTimeout(() => {
+        document.getElementById("game").style.display = "none";
+        const explanationEl = document.getElementById("explanation");
+        explanationEl.style.display = "block";
+
+        typeText("explanation", `
+In recent months, international students—especially from Asia and the Middle East—have faced abrupt and opaque disruptions to their lives in the United States.\n
+Under the Trump administration, hundreds of student visas were revoked, and more than a dozen international students were detained on university campuses—often without prior notice or access to appeal. Some were taken from dormitories. Others were interrogated at the airport and sent home immediately.\n
+In some cases, students were not accused of any crime, nor were they found to have attended protests. Their only offense: existing in a system that treats them as disposable.\n
+This is not just history.\nIt’s a reality that continues to echo in silence.\n
+Despite holding valid visas, international students are constantly reminded that their presence is conditional.\nTheir right to stay can be revoked at any moment—quietly, legally, and without recourse.\nEven though, under the First Amendment, students on visas are protected by the same rights to freedom of speech as citizens, they live under the threat that speaking too loudly, or standing in the wrong place at the wrong time, could erase them from the system.\n
+At the same time, society glorifies a brutal rhythm of overachievement:\nWork more. Sleep less. Always be available. Always be exceptional.\n
+This is toxic productivity—a culture that rewards burnout and punishes rest. It tells you that your value is tied to your output, and your exhaustion is a badge of honor. And when you fall behind, disappear, or collapse?\nIt pretends you were never really there.
+`);
+      }, 2000);
+    }, 3000);
+    return;
+  }
+
+
   const scene = storyData[sceneId];
   storyEl.textContent = scene.text;
 
@@ -214,6 +242,22 @@ function renderScene(sceneId) {
     };
     choicesEl.appendChild(button);
   });
+}
+
+function typeText(containerId, text, speed = 20) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+  let i = 0;
+
+  function type() {
+    if (i < text.length) {
+      container.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+
+  type();
 }
 
 renderScene("start");
