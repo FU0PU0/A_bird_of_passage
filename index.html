@@ -3,11 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <title>A bird of passage</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <main>
-    <div id="story" style="white-space: pre-line;"></div>
+  <!-- Intro 畫面 -->
+  <section id="intro">
+    <h1 class="title hidden">A Bird Of Passage</h1>
+
+<div class="info-box hidden">
+  <p>
+    You’ve just landed.<br>
+    No maps, no anchors—just your own wings.<br>
+    Where do you begin?
+  </p>
+</div>
+
+<img class="intro-gif hidden" src="未命名的作品.gif" alt="Intro animation">
+
+<div class="arrow hidden" onclick="startGame()">→</div>
+  </section>
+
+  <!-- 遊戲主畫面 -->
+  <main id="game">
+    <div id="story"></div>
     <div id="choices"></div>
   </main>
 

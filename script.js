@@ -1,6 +1,21 @@
 let playerName = ""; // 儲存使用者輸入的名字
 let playerHistory = null; // 記錄玩家選過的特定行動
 
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => document.querySelector('.intro-gif').classList.add('show'), 100);
+  setTimeout(() => document.querySelector('.title').classList.add('show'), 800);
+  setTimeout(() => document.querySelector('.info-box').classList.add('show'), 1600);
+  setTimeout(() => document.querySelector('.arrow').classList.add('show'), 2400);
+});
+
+function startGame() {
+  document.getElementById("intro").style.display = "none";
+  const gameSection = document.getElementById("game");
+  gameSection.style.display = "block";
+  setTimeout(() => gameSection.classList.add("active"), 50);
+  renderScene("start"); // 你的遊戲初始化邏輯
+}
+
 const storyData = {
   welcome: {
     get text() {

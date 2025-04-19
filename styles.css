@@ -1,0 +1,138 @@
+body {
+  margin: 0;
+  background-color: #f2f2f2;
+  font-family: 'Georgia', serif;
+}
+
+#intro {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#intro h1 {
+    z-index: 1;
+    font-family: 'Funnel Display', serif; 
+    font-weight: 800;
+    font-size: 100px;
+    margin-bottom: 1rem;
+    color: #333;
+    align-self: flex-start;   /* 靠左對齊 */
+    margin-left: 3vw;         /* 左邊加一點間距 */
+    text-align: left;
+}
+
+#intro img {
+  z-index: 2;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.info-box {
+    position: absolute;
+    align-self: flex-start; 
+    text-align: left;
+    top: 15vh;
+    left: 3vw;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    max-width: 280px;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #333;
+    z-index: 2;
+  }
+
+  .arrow {
+    position: absolute;
+    right: 5vw;
+    bottom: 1vh;
+    font-size: 5rem;
+    color: #444;
+    z-index: 3;
+    animation: bounceArrow 2s infinite;
+    cursor: default;
+  }
+
+#game {
+  display: none;
+  padding: 2rem;
+}
+
+#story {
+  white-space: pre-line;
+}
+
+#choices {
+  margin-top: 1rem;
+}
+
+/* 箭頭跳動 */
+@keyframes bounceArrow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+/* 淡入動畫 */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hidden {
+  opacity: 0;
+}
+
+/* 各元素分別延遲出現 */
+.intro-gif.show {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.title.show {
+  animation: fadeInUp 1s ease-out 0.8s forwards;
+}
+
+.info-box.show {
+  animation: fadeInUp 1s ease-out 1.6s forwards;
+}
+
+.arrow.show {
+  animation: fadeInUp 1s ease-out 2.4s forwards, bounceArrow 2s infinite 3.4s;
+}
+
+#game {
+    position: absolute;
+    inset: 0;                  /* top:0; right:0; bottom:0; left:0 */
+    background-color: #f2f2f2;
+    padding: 2rem;
+    opacity: 0;                /* 初始透明 */
+    transition: opacity 0.8s ease;
+    z-index: 4;
+  }
+  #game.active {
+    opacity: 1;                /* 加上 .active 就淡入 */
+  }
+  
+  /* 如果想让每个新场景里的文字和按钮同 intro 一样浮现 */
+  .fade-in {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  .fade-in-delay {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out 0.3s forwards;
+  }
