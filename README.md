@@ -1,2 +1,8 @@
 # A_bird_of_passage
- 
+ For my Community Tool or Quiz project, I originally intended to create a lighthearted interactive quiz website themed around New York City. It was designed for people who came to the city to work, study, or pursue their dreams. Through a series of scenario-based questions, users would discover what kind of “New York adventurer” they are and receive personalized suggestions—such as calming, restorative places in the city to recharge.
+
+However, recent developments—particularly the renewed instability in U.S. visa policies following Trump’s return to power—prompted me to shift the focus. News reports have revealed that many international students have had their visas revoked without warning, despite no wrongdoing. These stories struck a personal chord with me. As a result, I chose to redirect the project toward a more specific and personally meaningful community: international students in the U.S.
+
+In this interactive experience, the user takes on the role of a small bird who has just arrived in a new city. The story unfolds based on their decisions, serving as a metaphor for the unpredictable and often precarious journey of international students. The piece subtly reflects the anxiety around immigration policies, as well as the toxic productivity culture in the U.S.—the belief that one’s worth is tied solely to how hard they work or produce.
+
+Visually, I used Procreate to animate the characters and Photoshop to create collage-style backgrounds, evoking a gentle yet uneasy dreamlike atmosphere. While the tone remains soft and poetic, I hope the narrative helps users empathize with the challenges faced by international students, and recognize the seriousness of the systemic issues they endure.

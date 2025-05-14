@@ -1,6 +1,33 @@
 let playerName = ""; // 儲存使用者輸入的名字
 let playerHistory = null; // 記錄玩家選過的特定行動
 
+const STORAGE_KEY = "birdGameState";
+
+function saveState() {
+  const state = {
+    playerName,
+    playerHistory,
+    currentScene
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function loadState() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return false;          // 沒存檔就跳過
+  try {
+    const state = JSON.parse(raw);
+    playerName     = state.playerName     ?? "";
+    playerHistory  = state.playerHistory  ?? null;
+    currentScene   = state.currentScene   ?? "start";
+    return true;                    // 讀取成功
+  } catch (e) {
+    console.error("Save file broken", e);
+    localStorage.removeItem(STORAGE_KEY); // 壞檔就清掉
+    return false;
+  }
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => document.querySelector('.intro-gif').classList.add('show'), 100);
   setTimeout(() => document.querySelector('.title').classList.add('show'), 800);
@@ -152,6 +179,7 @@ function renderScene(sceneId) {
   storyEl.textContent = "";
   choicesEl.innerHTML = "";
   currentScene = sceneId;
+  saveState();  
 
   if (sceneId === "start") {
     storyEl.textContent = "Hi there, little bird!\nPlease let me know your name:";
@@ -167,6 +195,7 @@ function renderScene(sceneId) {
       const nameValue = document.getElementById("nameInput").value.trim();
       if (nameValue !== "") {
         playerName = nameValue;
+        saveState();  
         renderScene("welcome");
       } else {
         alert("Please enter your name.");
@@ -260,6 +289,18 @@ function typeText(containerId, text, speed = 20) {
   type();
 }
 
-renderScene("start");
+// 讀取存檔，若有就跳到前一次 scene，並直接顯示遊戲畫面
+if (loadState()) {
+  // 略過 intro 動畫
+  document.getElementById("intro").style.display = "none";
+  const gameSection = document.getElementById("game");
+  gameSection.style.display = "block";
+  gameSection.classList.add("active");
+  renderScene(currentScene);       // ← 接續進度
+} else {
+  // 沒存檔就正常流程
+  renderScene("start");
+}
+
 
   
